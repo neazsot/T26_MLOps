@@ -1,16 +1,18 @@
-import json
 import hashlib
+import json
 import sys
 from pathlib import Path
+
 import pandas as pd
+
 
 def validate(data_path, contract_path):
     with open(contract_path, 'r') as f:
         contract = json.load(f)
-    
+
     try:
         df = pd.read_csv(data_path)
-    except Exception:
+    except (FileNotFoundError, pd.errors.EmptyDataError):
         return 1
 
     checks = []
@@ -40,21 +42,21 @@ def validate(data_path, contract_path):
     for col, rules in contract['columns'].items():
         if col not in df.columns:
             continue
-        
+
         if rules.get('type') == 'integer':
             if not pd.api.types.is_integer_dtype(df[col]):
                 passed = False
                 checks.append({"rule": f"{col}_type", "passed": False, "message": "Not integer"})
             else:
                 checks.append({"rule": f"{col}_type", "passed": True})
-        
+
         if 'minimum' in rules and 'maximum' in rules:
             if df[col].min() < rules['minimum'] or df[col].max() > rules['maximum']:
                 passed = False
                 checks.append({"rule": f"{col}_range", "passed": False, "message": f"Out of range [{rules['minimum']}, {rules['maximum']}]"})
             else:
                 checks.append({"rule": f"{col}_range", "passed": True})
-        
+
         if 'allowed_values' in rules:
             if not df[col].isin(rules['allowed_values']).all():
                 passed = False
@@ -81,14 +83,15 @@ def validate(data_path, contract_path):
         "passed": passed,
         "checks": checks
     }
-    
+
     report_path = Path('reports/validation/lr2.json')
     report_path.parent.mkdir(parents=True, exist_ok=True)
     with open(report_path, 'w') as f:
         json.dump(report, f, indent=2)
-    
+
     print(json.dumps(report, indent=2))
     return 0 if passed else 1
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
