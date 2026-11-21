@@ -10,7 +10,7 @@ def validate(data_path, contract_path):
     
     try:
         df = pd.read_csv(data_path)
-    except Exception as e:
+        except Exception:
         return 1
 
     checks = []
