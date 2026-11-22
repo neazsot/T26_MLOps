@@ -1,0 +1,56 @@
+{
+  "contract_version": "1.0.0",
+  "dataset": "flight-delay-training-sample",
+  "data_file": "data/flights_sample.csv",
+  "sha256": "35ce3f1f75131bd9aea668dd2287dccc170c712c6e579265618e63f8c721f457",
+  "rows": 12,
+  "columns": [
+    "FlightDate",
+    "DepHour",
+    "IsWeekend",
+    "ArrDelay"
+  ],
+  "passed": true,
+  "checks": [
+    {
+      "rule": "columns",
+      "passed": true
+    },
+    {
+      "rule": "min_rows",
+      "passed": true
+    },
+    {
+      "rule": "nullable",
+      "passed": true
+    },
+    {
+      "rule": "DepHour_type",
+      "passed": true
+    },
+    {
+      "rule": "DepHour_range",
+      "passed": true
+    },
+    {
+      "rule": "IsWeekend_type",
+      "passed": true
+    },
+    {
+      "rule": "IsWeekend_values",
+      "passed": true
+    },
+    {
+      "rule": "ArrDelay_type",
+      "passed": true
+    },
+    {
+      "rule": "ArrDelay_range",
+      "passed": true
+    },
+    {
+      "rule": "duplicates",
+      "passed": true
+    }
+  ]
+}

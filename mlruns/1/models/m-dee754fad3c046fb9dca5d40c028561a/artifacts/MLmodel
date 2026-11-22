@@ -1,0 +1,24 @@
+artifact_path: file:///C:/Users/Neazst/PycharmProjects/T26_MLOps/mlruns/1/models/m-dee754fad3c046fb9dca5d40c028561a/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.11.2
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - sklearn.tree._tree.Tree
+mlflow_version: 3.18.0
+model_id: m-dee754fad3c046fb9dca5d40c028561a
+model_size_bytes: 1393071
+model_uuid: m-dee754fad3c046fb9dca5d40c028561a
+prompts: null
+run_id: e8ce930a78964c459b38dd98729cab6a
+utc_time_created: '2026-11-22 09:12:42.101889'
