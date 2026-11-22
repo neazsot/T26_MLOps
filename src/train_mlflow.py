@@ -1,11 +1,12 @@
 import argparse
 import hashlib
 from pathlib import Path
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_score
+
 import mlflow
 import mlflow.sklearn
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 
 
 def load_data(path):
