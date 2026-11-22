@@ -1,5 +1,4 @@
 import argparse
-import json
 import hashlib
 from pathlib import Path
 import pandas as pd
@@ -24,8 +23,7 @@ def split_data(df):
 
     train = df.iloc[:train_end]
     val = df.iloc[train_end:val_end]
-    test = df.iloc[val_end:]
-    return train, val, test
+    return train, val
 
 
 def main():
@@ -38,7 +36,7 @@ def main():
     args = parser.parse_args()
 
     df = load_data(args.data)
-    train, val, test = split_data(df)
+    train, val = split_data(df)
 
     features = ['DepHour', 'IsWeekend']
 
