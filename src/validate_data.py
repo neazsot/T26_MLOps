@@ -50,6 +50,14 @@ def validate(data_path, contract_path):
             else:
                 checks.append({"rule": f"{col}_type", "passed": True})
 
+        if rules.get('type') == 'date':
+            try:
+                pd.to_datetime(df[col], format=rules.get('format', '%Y-%m-%d'))
+                checks.append({"rule": f"{col}_date", "passed": True})
+            except (ValueError, TypeError):
+                passed = False
+                checks.append({"rule": f"{col}_date", "passed": False, "message": "Invalid date format"})
+
         if 'minimum' in rules and 'maximum' in rules:
             if df[col].min() < rules['minimum'] or df[col].max() > rules['maximum']:
                 passed = False
