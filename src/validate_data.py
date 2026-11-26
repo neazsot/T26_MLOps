@@ -54,7 +54,7 @@ def validate(data_path, contract_path):
             try:
                 pd.to_datetime(df[col], format=rules.get('format', '%Y-%m-%d'))
                 checks.append({"rule": f"{col}_date", "passed": True})
-            except Exception:
+            except (ValueError, TypeError):
                 passed = False
                 checks.append({"rule": f"{col}_date", "passed": False, "message": "Invalid date format"})
 
